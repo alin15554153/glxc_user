@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1.0, maximum-scale=1"
+    />
+    <title>公安三维大数据监督指挥平台</title>
+    <link href="css/mystyle.css" rel="stylesheet" />
+    <link href="css/cas.css" rel="stylesheet" />
+    <link href="css/ie_cas.css" rel="stylesheet" />
+    <link href="css/new_style.css" rel="stylesheet" />
+    <style>
+      html,
+      body {
+        position: absolute;
+        width: 100%;
+        height: 100%;
+        margin: 0 0;
+        overflow: hidden;
+        font-family: 'Lato', sans-serif;
+      }
+
+      .world {
+        position: absolute;
+        width: 100%;
+        height: 100%;
+        cursor: pointer;
+        cursor: move;
+        cursor: -moz-grab;
+        cursor: -webkit-grab;
+        cursor: grab;
+        z-index: -1;
+        margin-top: 50px;
+      }
+
+      .world-bg {
+        position: absolute;
+        width: 100%;
+        height: 100%;
+        background-position: 50% 50%;
+        background-size: cover;
+      }
+
+      .world-globe {
+        position: absolute;
+        left: 50%;
+        top: 50%;
+        width: 0;
+        height: 0;
+      }
+
+      .world-globe-pole {
+        position: absolute;
+        width: 730px;
+        height: 730px;
+        left: -365px;
+        top: -365px;
+        border-radius: 50% 50%;
+        background-color: #fff;
+      }
+
+      .world-globe-doms-container {
+        position: absolute;
+        left: 50%;
+        top: 50%;
+        width: 0;
+        height: 0;
+      }
+
+      .world-globe-halo {
+        position: absolute;
+        left: 50%;
+        top: 50%;
+        width: 979px;
+        height: 939px;
+        margin-left: -490px;
+        margin-top: -440px;
+      }
+
+      a {
+        color: #ff5f5f;
+      }
+
+      #space {
+        width: 100%;
+        z-index: -99;
+        position: absolute;
+      }
+    </style>
+    <script type="text/javascript" src="js/common_rosters.js"></script>
+    <script type="text/javascript" src="js/jquery-1.7.2.min.js"></script>
+    <script type="text/javascript" src="js/index.js"></script>
+  </head>
+  <body>
+    <div class="title">
+      <img src="img/newest_earth/login_title.png" width="900px" height= "300px" alt="" />
+    </div>
+    <div id="interactive">
+      <div
+        class="login"
+        style="background-image: url(img/newest_earth/login_frame.png)"
+      >
+        <!-- <div class="login_title"><span>智慧新城综合管理信息共享平台</span></div> -->
+        <div class="login_fields">
+          <div class="login_fields__user">
+            <div
+              class="icon"
+              style="position: absolute;
+            top: 50%;
+            margin-top: -12px;left: 16px;"
+            >
+              <img alt="" src="img/newest_earth/login_ic_user.png" />
+            </div>
+            <input
+              id="username"
+              placeholder="请输入用户名"
+              path="username"
+              autocomplete="false"
+              htmlEscape="true"
+              maxlength="16"
+              type="text"
+              style="left: 60px;width: 250px;"
+            />
+            <div class="validation">
+              <img alt="" src="img/newest_earth/tick.png" />
+            </div>
+          </div>
+
+          <div class="login_fields__password">
+            <div
+              class="icon"
+              style="position: absolute;
+            top: 50%;
+            margin-top: -12px;left: 16px;"
+            >
+              <img alt="" src="img/newest_earth/login_ic_pwd.png" />
+            </div>
+            <input
+              type="password"
+              id="password"
+              placeholder="请输入密码"
+              path="password"
+              htmlEscape="true"
+              autocomplete="off"
+              maxlength="16"
+              style="left: 60px;width: 250px;"
+            />
+            <div class="validation">
+              <img alt="" src="img/newest_earth/tick.png" />
+            </div>
+          </div>
+
+          <div class="login_fields__submit">
+            <input type="hidden" name="lt" value="" />
+            <input type="hidden" name="_eventId" value="submit" />
+            <input
+              class="btn-submit loginBtn"
+              type="submit"
+              value="登录"
+              name="submit"
+              onclick="javascript:location.href='nav.html'"
+            />
+          </div>
+        </div>
+        <div class="success"></div>
+      </div>
+
+      <div class="OverWindows"></div>
+      <link href="lib/layui/css/layui.css" rel="stylesheet" type="text/css" />
+    </div>
+    <div class="world">
+      <div class="world-bg"></div>
+      <div class="world-globe">
+        <div class="world-globe-pole"></div>
+        <div class="world-globe-doms-container"></div>
+        <div class="world-globe-halo"></div>
+      </div>
+    </div>
+    <canvas id="space"></canvas>
+
+    <script
+      src="js/newest_earth/dat.gui.min.js"
+      type="text/javascript"
+    ></script>
+    <script src="js/newest_earth//Stats.js" type="text/javascript"></script>
+    <script
+      src="js/newest_earth//TweenMax.min.js"
+      type="text/javascript"
+    ></script>
+    <script
+      src="js/newest_earth/css_globe_PerspectiveTransform.js"
+      type="text/javascript"
+    ></script>
+    <script type="text/javascript" src="js/login.js"></script>
+  </body>
+</html>

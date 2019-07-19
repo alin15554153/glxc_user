@@ -1,0 +1,351 @@
+<!DOCTYPE html>
+<html>
+
+<!-- Mirrored from 59.110.226.79:8888/police3D1.4/view/mainView.html by HTTrack Website Copier/3.x [XR&CO'2013], Mon, 18 Mar 2019 02:51:46 GMT -->
+<head>
+<meta charset="utf-8">
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
+<title>智慧新城综合管理信息共享平台</title>
+<link href="css/mystyle.css" rel="stylesheet">
+<link href="css/map_selecter.css" rel="stylesheet">
+
+
+<script type="text/javascript" src="http://webapi.amap.com/maps?v=1.3&key=740ea77be6ce09d67fa304cb7bf01084"></script>
+<script src="lib/js/jquery/jquery-1.9.1.min.js"></script>
+<script src="js/util_css.js"></script>
+<script src="js/util_lib.js"></script>
+<script src="js/map_selecter.js"></script>
+
+<script src="js/PlaceSearch.js"></script>
+<style>
+	
+	@import url(lib/CesiumUnminified/Widgets/widgets.css);
+	html, body, #cesiumContainer {
+		width: 100%; height: 100%; margin: 0; padding: 0; overflow: hidden;
+	}
+	.echarts {
+      position: absolute;
+      bottom: 0;
+      height: 300px;
+      width: 100%;
+      background-color: rgba(7, 7, 9, 0.65);
+      color: #fff;
+      font-size: 0;
+    }
+
+    .arrow {
+      position: absolute;
+      top: -25px;
+      left: 50%;
+      width: 50px;
+      height: 25px;
+      margin-left: -25px;
+      border-radius: 25px 25px 0 0;
+      background-color: rgba(7, 7, 9, 0.65);
+      text-align: center;
+      z-index: 0;
+    }
+
+    .arrow_unfold,
+    .arrow_fold {
+      display: inline-block;
+      width: 18px;
+      height: 18px;
+      margin-top: 4px;
+    }
+
+    .arrow_unfold {
+      background: url('img/layout_ic_unfold.png') no-repeat;
+      background-size: cover
+    }
+
+    .arrow_fold {
+      background: url('img/layout_ic_fold.png') no-repeat;
+      background-size: cover
+    }
+
+    .charts {
+      display: inline-block;
+      vertical-align: middle;
+      height: 300px;
+    }
+
+    .charts .title {
+      margin: 10px 0;
+      font-size: 20px;
+      color: #fff;
+    }
+
+    .title-icon {
+      display: inline-block;
+      vertical-align: middle;
+      width: 28px;
+      height: 28px;
+    }
+
+    .title-icon_main {
+      background: url('img/layout_title0.png') no-repeat;
+      background-size: cover;
+    }
+
+    .title-icon_type {
+      background: url('img/layout_title1.png') no-repeat;
+      background-size: cover;
+    }
+
+    .title-icon_taxe {
+      background: url('img/layout_title2.png') no-repeat;
+      background-size: cover;
+    }
+
+    .title-icon_trend {
+      background: url('img/layout_title3.png') no-repeat;
+      background-size: cover;
+    }
+
+    .list-wrapper {
+      width: 100%;
+      font-size: 0
+    }
+
+    .list-item {
+      display: inline-block;
+      width: 20%;
+    }
+
+    .name {
+      font-size: 12px;
+      text-align: center;
+    }
+
+    .datas {
+      margin-top: 5px;
+      font-size: 16px;
+      text-align: center;
+    }
+
+    .blue {
+      color: #01d1f9
+    }
+
+    .orange {
+      color: #dbb333
+    }
+
+
+    .pieChart {
+      display: inline-block;
+      width: 250px;
+      height: 225px;
+    }
+
+    .business-list li {
+      width: 200px;
+      padding: 10px;
+      margin-bottom: 10px;
+      font-size: 14px;
+      background: rgba(48, 68, 96, 0.65);
+    }
+
+    .business-list li:last-child {
+      margin: 0
+    }
+
+    .barChart {
+      width: 250px;
+      height: 270px;
+    }
+
+    .lineChart {
+      width: 350px;
+      height: 270px;
+    }
+	
+</style>
+</head>
+<body class="mybody blue-bg">
+
+		<div class="collapse">
+			<div class="logo">
+				<img src="img/newest_earth/nav_top_bg.png" alt="" />
+			  </div>
+				<div class="toolsmt">
+						<div id="searchPostions" class="searchPostions">
+							<input placeholder="请输入搜索地名" id="words" class="words" onkeyup="autoInput(this)" style="width: 120px";>
+						</div>
+						<div id ="search_results_div"></div>
+						<div class="btn-group">
+							<a id="map_marker_3D" href="javascript:CesiumIndex.wholeView(119.499698, 32.366185,3600);" title="原始视角">
+									<i class="fa fa-map-marker myfab"></i></a> 
+
+							<a class="dropdown-toggle" data-toggle="dropdown" title="量测(右键结束)"> 
+								<i class="fa fa-pencil myfab"></i></a>
+							<ul class="dropdown-menu" role="menu">
+								<li id="measure_distances">
+									<a href="#measure_distances" data-tab="tab-chrome"> 
+										<i class="fa fa-tags myfab myfab-mr"></i>测 距</a></li>
+								<li id="measure_height">
+									<a href="#measure_height" data-tab="tab-firefox"> 
+										<i class="fa fa-magic myfab myfab-mr"></i>测 高</a></li>
+								<li id="measure_area">
+									<a href="#measure_area" data-tab="tab-safari"> 
+										<i class="fa fa-edit myfab myfab-mr"></i>测 面</a></li>
+							</ul>
+							<a id="measure_clear" class="dropdown-toggle" title="清除" onclick="javascript:location.href='nav.html'"> 
+								<i class="fa fa-remove myfab"></i></a>
+						</div>
+				</div>
+		</div>
+		<div class="map3d" id="cesiumContainer"></div>
+
+
+		<div id="blockcolor_di" class="blockcolor_dc">
+			<div class="corlorStyle">
+				<img src="img/Legend/legend.png" alt="">
+			</div>
+			<div class="corlorStyle">
+				<img src="img/Legend/legend1.png" alt="">
+			</div>			
+			<div class="corlorStyle">
+				<img src="img/Legend/legend2.png" alt="">
+			</div>
+			<div>
+				<div class="corlorStyle" style="float: left;">
+						<img style="width:48px; margin:8px;" src="img/Legend/初中.png" alt="">
+						<p style="text-align:center">初中</p>
+				</div>
+				<div class="corlorStyle" style="float: left;">
+						<img style="width:48px; margin:8px;" src="img/Legend/小学.png" alt="">
+						<p style="text-align:center;">小学</p>
+				</div>
+				<div class="corlorStyle" style="float: left;">
+						<img style="width:48px; margin:8px;" src="img/Legend/幼儿园.png" alt="">
+						<p style="text-align:center;">幼儿园</p>
+				</div>
+			</div>
+			<div>
+				<div class="corlorStyle" style="float: left;">
+						<img style="width:48px; margin:8px;" src="img/Legend/商办.png" alt="">
+						<p style="text-align:center">商办</p>
+				</div>
+				<div class="corlorStyle" style="float: left;">
+						<img style="width:48px; margin:8px;" src="img/Legend/政务中心.png" alt="">
+						<p style="text-align:center;">政务</p>
+				</div>
+				<div class="corlorStyle" style="float: left;">
+						<img style="width:48px; margin:8px;" src="img/Legend/公园.png" alt="">
+						<p style="text-align:center;">公园</p>
+				</div>
+			</div>
+			<div>
+				<div class="corlorStyle" style="float: left;">
+						<img style="width:48px; margin:8px;" src="img/Legend/医院.png" alt="">
+						<p style="text-align:center">医院</p>
+				</div>
+				<div class="corlorStyle" style="float: left;">
+						<img style="width:48px; margin:8px;" src="img/Legend/工业园.png" alt="">
+						<p style="text-align:center;">工业园</p>
+				</div>
+				<div class="corlorStyle" style="float: left;">
+						<img style="width:48px; margin:8px;" src="img/Legend/农贸.png" alt="">
+						<p style="text-align:center;">农贸</p>
+				</div>
+			</div>
+
+		</div>
+
+		
+		<div id="builderWFSTree" class="builderWFSTree">
+			<ul id="buiTree" class="ztree myztree"></ul>
+			<link rel="stylesheet" type="text/css" href="lib/zTree/zTreeStyle.css" />
+		</div> 
+		<div class="builderWFSTabledivcss" id ="builderWFSTabledivid">
+			<table id="builderWFSIdTable"></table>
+		</div>
+		<div class="blockWFSTabledivcss" id ="blockWFSTabledivid">
+				<table id="blockWFSIdTable"></table>
+			</div>
+		<div class="lease_Tabledivcss" id ="lease_Tabledivid">
+			<table id="lease_Ti"></table>
+		</div>
+
+		<div class="echarts collapse" id="echarts" style="height: 0px">
+			<div class="arrow" data-toggle="collapse" data-target="#echarts"><i class="arrow_unfold" ></i></div>
+			<div class="charts">
+				<div>
+					<div class="title" style="padding-left: 20px">E4-4单元统计</div>
+					<div class="list-wrapper">
+						<div class="list-item">
+							<div class="name">用地面积</div>
+							<div class="datas blue">9546.25</div>
+						</div>
+						<div class="list-item">
+							<div class="name">总建筑面积</div>
+							<div class="datas orange">6546.25</div>
+						</div>
+						<div class="list-item">
+							<div class="name">入驻企业输</div>
+							<div class="datas blue">32</div>
+						</div>
+						<div class="list-item">
+							<div class="name">已售面积</div>
+							<div class="datas orange">3225.23</div>
+						</div>
+						<div class="list-item">
+							<div class="name">可售面积</div>
+							<div class="datas blue">1225.23</div>
+						</div>
+					</div>
+				</div>
+				<div id="pie" class="pieChart"></div>
+				<div id="pie1" class="pieChart"></div>
+				<div id="pie2" class="pieChart"></div>
+			</div>
+			<div class="charts">
+				<div class="title"><i class="title-icon title-icon_main"></i> 重点企业列表</div>
+				<ul class="business-list">
+					<li>京东商城</li>
+					<li>中国移动通信集团公司</li>
+					<li>中国电信股份有限公司</li>
+					<li>中国联通网络通讯集团</li>
+					<li>中国人寿保险公司</li>
+				</ul>
+			</div>
+			<div class="charts">
+				<div class="title"><i class="title-icon title-icon_type"></i>企业类型</div>
+				<div id="bar_h" class="barChart"></div>
+			</div>
+			<div class="charts">
+				<div class="title"><i class="title-icon title-icon_taxe"></i>重点企业纳税</div>
+				<div id="line" class="lineChart"></div>
+			</div>
+			<div class="charts">
+				<div class="title"><i class="title-icon title-icon_trend"></i>近一年租售趋势</div>
+				<div id="bar_v" class="lineChart"></div>
+			</div>
+		</div>
+		<script type="text/javascript" src="http://echarts.baidu.com/gallery/vendors/echarts/echarts.min.js"></script>
+		<script type="text/javascript" src="http://echarts.baidu.com/gallery/vendors/echarts-gl/echarts-gl.min.js"></script>
+		<script type="text/javascript" src="http://echarts.baidu.com/gallery/vendors/echarts-stat/ecStat.min.js"></script>
+		<script type="text/javascript" src="http://echarts.baidu.com/gallery/vendors/echarts/extension/dataTool.min.js"></script>
+		<script type="text/javascript" src="http://echarts.baidu.com/gallery/vendors/echarts/map/js/world.js"></script>
+		<script type="text/javascript" src="http://echarts.baidu.com/gallery/vendors/echarts/extension/bmap.min.js"></script>
+		<script type="text/javascript" src="http://echarts.baidu.com/gallery/vendors/simplex.js"></script>
+
+		<script type="text/javascript" src="js/echarts/map.js"></script>
+		<script type="text/javascript" src="js/echarts/pie.js"></script>
+		<script type="text/javascript" src="js/echarts/bar.js"></script>
+
+		<script src="js/cesium_index.js"></script>
+	<script src="js/data_wfs.js"></script>
+	<script src="js/data_wms.js"></script>
+	<script src="js/data_3Dtile.js"></script>
+	<script src="js/data_op.js"></script>
+
+
+<!-- 	<script src="js/plan.js"></script> -->
+</body>
+
+<!-- Mirrored from 59.110.226.79:8888/police3D1.4/view/mainView.html by HTTrack Website Copier/3.x [XR&CO'2013], Mon, 18 Mar 2019 02:51:58 GMT -->
+</html>
