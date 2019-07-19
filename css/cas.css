@@ -1,0 +1,197 @@
+﻿* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body, html {
+  height: 100vh;
+  width: 100vw;
+  overflow: hidden;
+  background-color: #012140;
+}
+
+.wrap {
+  position: relative;
+  height: 100%;
+  width: 100%;
+  background: url(navimg/ditu.jpg) no-repeat center;
+  background-size: cover;
+}
+
+.wrap canvas {
+  height: 100%;
+  width: 100%;
+}
+
+.container {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+}
+
+header {
+  width: 330px;
+  height: 65px;
+  margin-top: 1%;
+  margin-left: 4%;
+}
+
+section {
+  /* height: 303px;
+    width: 100%;
+    position: absolute;
+    top: 24%;
+    background: url(navimages/bgRepeat.png) repeat-x center;
+    background-position-y: 88%; */
+  height: 364px;
+  width: 565px;
+  position: absolute;
+  left: calc((100% - 565px) / 2);
+  top: calc((100% - 364px) / 2);
+  background: url(navimg/denglu01.png) no-repeat center;
+}
+
+/* .loginBg{
+    width: 60%;
+    height: 100%;
+    margin: auto;
+    background: url(navimages/loginBg.png) no-repeat top left;
+    position: relative;
+} */
+
+.form {
+  /* position: absolute;
+    left: 540px;
+    top: 112px;
+    width: 226px;
+    height: 105px;
+    background: url(navimages/input.png) no-repeat top left;  */
+  width: 100%;
+  height: 100%;
+}
+
+.form-hd {
+  width: 336px;
+  height: 73px;
+  background: url(navimages/biaoti.png) no-repeat;
+  background-size: 100% 100%;
+  position: absolute;
+  top: 35px;
+  left: 115px;
+}
+
+.form input {
+  background: transparent;
+  border: none;
+  outline: none;
+}
+
+.form-ipt {
+  width: 100%;
+  height: 162px;
+  position: absolute;
+  top: 110px;
+}
+
+.form-ipt input {
+  /* height: 34px;
+    margin-left: 35px;
+    width: 151px;
+    margin-bottom: 4px;
+    color: #85CAF2; */
+  width: 326px;
+  height: 35px;
+  position: absolute;
+  padding-left: 20px;
+  padding-right: 20px;
+  margin-left: 120px;
+  background: url(navimages/dlk.png) no-repeat;
+  background-size: 100% 100%;
+  color: #85CAF2;
+  text-align: center;
+}
+
+#username {
+  position: absolute;
+  top: 4px;
+  left: 90px;
+  height: 30px;
+  border: none;
+  background: #fff;
+  /* margin-bottom: 10px; */
+}
+
+#password {
+  /* margin-top: 10px; */
+  position: absolute;
+  left: 90px;
+  height: 40px;
+}
+
+.form .loginBtn {
+  /* height: 38px;
+    width: 38px;
+    position: absolute;
+    right: 0;
+    top: 17px;
+    border: none;
+    background: url(navimages/form.png) no-repeat;
+    background-position: 0 0; */
+  width: 334px;
+  height: 43px;
+  position: absolute;
+  border: none;
+  background: url(images/chushi.png) no-repeat;
+  background-size: 100% 100%;
+  bottom: 53px;
+  left: 120px;
+  font-size: 22px;
+  color: #fff;
+}
+
+.form .loginBtn:hover {
+  /* background-position: -56px 0; */
+  background: url(images/chufa.png) no-repeat;
+  background-size: 100% 100%;
+  color: #01edfd;
+}
+
+/* .form .errorMsg{
+    width: 100%;
+    height: 22px;
+    line-height: 22px;
+    font-size: 13px;
+    color: #FF6666;
+    letter-spacing: 1px;
+} */
+
+#wcximg {
+  /* height: 100%;
+    width: 100%;
+    background: url(navimages/header.png) no-repeat; */
+}
+
+#wcxfooter {
+  position: absolute;
+  bottom: 2%;
+  left: 0;
+  height: 79px;
+  width: 100%;
+  /* width: 100%; */
+  /* background: url(navimages/FooterBg.png) no-repeat center; */
+}
+
+#wcxfooter p {
+  color: #73A3ED;
+  width: 100%;
+  text-align: center;
+  /* margin-top: 22px; */
+}
+
+input:-webkit-autofill, textarea:-webkit-autofill, select:-webkit-autofill {
+  -webkit-box-shadow: 0 0 0px 1000px rgb(20, 61, 108) inset;
+  border: 1px solid rgb(20, 61, 108) !important;
+}

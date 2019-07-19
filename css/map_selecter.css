@@ -1,0 +1,142 @@
+ul {
+    margin: 0px;
+    padding: 0px;
+    list-style-type: none;
+}
+
+.map-type-toolbar {
+    font-family: 'Microsoft YaHei';
+    font-size: 9pt;
+    color: #ffffff;
+    background-color: rgba(0, 0, 0, 0);
+    height: 80px;
+    width: 140px;
+    cursor: pointer;
+    position: fixed;
+    bottom: 0px;
+    right: 0px;
+    z-index: 9990;
+}
+
+.map-type-toolbar:hover {
+    animation: show-toolbar 0.5s;
+    -moz-animation: show-toolbar 0.5s; /* Firefox */
+    -webkit-animation: show-toolbar 0.5s; /* Safari and Chrome */
+    -o-animation: show-toolbar 0.5s; /* Opera */
+    width: 395px;
+    background-color: rgba(255, 255, 255, 0.8);
+}
+
+@keyframes show-toolbar {
+    0% {
+        width: 140px;
+        background-color: rgba(255, 255, 255, 0);
+    }
+    100% {
+        width: 400px;
+        background-color: rgba(255, 255, 255, 0.8);
+    }
+}
+
+.map-type-toolbar .map-2D {
+    background-image: url("../img/map-2D.jpg");
+    position: fixed;
+    right: 10px;
+    bottom: 10px;
+    z-index: 9999;
+}
+
+.map-type-toolbar .map-WFS {
+    background-image: url("../img/map-wfs.jpg");
+    position: fixed;
+    right: 20px;
+    bottom: 10px;
+    z-index: 9998;
+    filter: alpha(Opacity=50);
+    -moz-opacity: 0.5;
+    opacity: 0.5;
+    transition: right 0.5s, filter 2s, -moz-opacity 2s, opacity 2s;
+    -moz-transition: right 0.5s; /* Firefox 4 */
+    -webkit-transition: right 0.5s, filter 1s, -moz-opacity 1s, opacity 1s; /* Safari and Chrome */
+    -o-transition: right 0.5s; /* Opera */
+}
+
+.map-type-toolbar:hover .map-WFS {
+    filter: alpha(Opacity=100);
+    -moz-opacity: 1;
+    opacity: 1;
+    right: 106px;
+}
+
+.map-type-toolbar .map-3D {
+    background-image: url("../img/map-3D.jpg");
+    position: fixed;
+    right: 30px;
+    bottom: 10px;
+    z-index: 9997;
+    filter: alpha(Opacity=40);
+    -moz-opacity: 0.4;
+    opacity: 0.4;
+    transition: right 0.5s, filter 2s, -moz-opacity 2s, opacity 2s;
+    -moz-transition: right 0.5s; /* Firefox 4 */
+    -webkit-transition: right 0.5s, filter 1s, -moz-opacity 1s, opacity 1s; /* Safari and Chrome */
+    -o-transition: right 0.5s; /* Opera */
+}
+
+.map-type-toolbar:hover .map-3D {
+    filter: alpha(Opacity=100);
+    -moz-opacity: 1;
+    opacity: 1;
+    right: 202px;
+}
+
+.map-type-toolbar .map-OP {
+    background-image: url("../img/map-op.jpg");
+    position: fixed;
+    right: 40px;
+    bottom: 10px;
+    z-index: 9996;
+    filter: alpha(Opacity=40);
+    -moz-opacity: 0.4;
+    opacity: 0.4;
+    transition: right 0.5s, filter 2s, -moz-opacity 2s, opacity 2s;
+    -moz-transition: right 0.5s; /* Firefox 4 */
+    -webkit-transition: right 0.5s, filter 1s, -moz-opacity 1s, opacity 1s; /* Safari and Chrome */
+    -o-transition: right 0.5s; /* Opera */
+}
+
+.map-type-toolbar:hover .map-OP {
+    filter: alpha(Opacity=100);
+    -moz-opacity: 1;
+    opacity: 1;
+    right: 298px;
+}
+
+.map-type-btn {
+    float: right;
+    margin-left: 10px;
+    margin-top: 10px;
+    width: 86px;
+    height: 60px;
+    background-image: url("../img/maptype.png");
+    border: 1px solid #aaaaaa;
+}
+
+.map-type-btn span {
+    margin-top: 40px;
+    padding: 2px 4px;
+    float: right;
+    margin-right: 0px;
+}
+.map-type-btn .map-3D-chechbox{
+    margin-top: 40px;
+    margin-left: 4px;
+    float: left;
+}
+.map-type-btn:hover {
+    border: 1px solid #4185FC;
+}
+
+.map-type-btn:hover span {
+    background-color: #4185FC;
+}
