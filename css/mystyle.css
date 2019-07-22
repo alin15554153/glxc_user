@@ -255,14 +255,15 @@ h1, h2, h3 {
   background-color: rgba(0, 0, 0, 0.8);
   z-index: 200;
   position: absolute;
-  top: 100px;
+  top: 75px;
   left: 10px;
-  /* display: none; */
+  display: none;
 }
 
 
 .corlorStyle:hover {
   background-color: rgba(131, 131, 131, 0.8);
+  background-color: rgb(0, 145, 48);
 }
 /* tabel */
 
