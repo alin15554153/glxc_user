@@ -8,11 +8,16 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
 <title>智慧新城综合管理信息共享平台</title>
 <link href="css/mystyle.css" rel="stylesheet">
-<link href="css/map_selecter.css" rel="stylesheet">
+
 
 
 <script type="text/javascript" src="http://webapi.amap.com/maps?v=1.3&key=740ea77be6ce09d67fa304cb7bf01084"></script>
 <script src="lib/js/jquery/jquery-1.9.1.min.js"></script>
+
+<link href="css/map_selecter.css" rel="stylesheet">
+<link href="css/custom.css" rel="stylesheet">
+<link href="css/jquery.mCustomScrollbar.min.css" rel="stylesheet">
+
 <script src="js/util_css.js"></script>
 <script src="js/util_lib.js"></script>
 <script src="js/map_selecter.js"></script>
@@ -199,63 +204,25 @@
 		</div>
 		<div class="map3d" id="cesiumContainer"></div>
 
-
-		<div id="blockcolor_di" class="blockcolor_dc">
-			<div class="corlorStyle">
-				<img src="img/Legend/legend.png" alt="">
-			</div>
-			<div class="corlorStyle">
-				<img src="img/Legend/legend1.png" alt="">
-			</div>			
-			<div class="corlorStyle">
-				<img src="img/Legend/legend2.png" alt="">
-			</div>
-			<div>
-				<div class="corlorStyle" style="float: left;">
-						<img style="width:48px; margin:8px;" src="img/Legend/初中.png" alt="">
-						<p style="text-align:center">初中</p>
+		<div class="page-wrapper in">
+			<nav id="sidebar" class="sidebar-wrapper">
+				<div  class="sidebar-content " id="blockcolor_di">
+					<a href="#" id="toggle-sidebar">lll</a>
+					<div class="corlorStyle" style="margin-top:85px">
+						<a href="javascript:Wfs.showBlockByColor();"><img src="img/Legend/legend.png" alt="" ></a>
+					</div>
+					<div class="corlorStyle">
+						<a href="javascript:Wfs.showBlockByBuild();"><img src="img/Legend/legend1.png" alt="" ></a>
+					</div>			
+					<div class="corlorStyle">
+						<a href="javascript:Wfs.showBlockBySale();"><img src="img/Legend/legend2.png" alt="" ></a>
+					</div>
+					<div class="corlorStyle">
+						<a href="javascript:Wfs.showLibel();"><img src="img/Legend/label.png" alt="" ></a>
+					</div>
 				</div>
-				<div class="corlorStyle" style="float: left;">
-						<img style="width:48px; margin:8px;" src="img/Legend/小学.png" alt="">
-						<p style="text-align:center;">小学</p>
-				</div>
-				<div class="corlorStyle" style="float: left;">
-						<img style="width:48px; margin:8px;" src="img/Legend/幼儿园.png" alt="">
-						<p style="text-align:center;">幼儿园</p>
-				</div>
-			</div>
-			<div>
-				<div class="corlorStyle" style="float: left;">
-						<img style="width:48px; margin:8px;" src="img/Legend/商办.png" alt="">
-						<p style="text-align:center">商办</p>
-				</div>
-				<div class="corlorStyle" style="float: left;">
-						<img style="width:48px; margin:8px;" src="img/Legend/政务中心.png" alt="">
-						<p style="text-align:center;">政务</p>
-				</div>
-				<div class="corlorStyle" style="float: left;">
-						<img style="width:48px; margin:8px;" src="img/Legend/公园.png" alt="">
-						<p style="text-align:center;">公园</p>
-				</div>
-			</div>
-			<div>
-				<div class="corlorStyle" style="float: left;">
-						<img style="width:48px; margin:8px;" src="img/Legend/医院.png" alt="">
-						<p style="text-align:center">医院</p>
-				</div>
-				<div class="corlorStyle" style="float: left;">
-						<img style="width:48px; margin:8px;" src="img/Legend/工业园.png" alt="">
-						<p style="text-align:center;">工业园</p>
-				</div>
-				<div class="corlorStyle" style="float: left;">
-						<img style="width:48px; margin:8px;" src="img/Legend/农贸.png" alt="">
-						<p style="text-align:center;">农贸</p>
-				</div>
-			</div>
-
+			</nav>
 		</div>
-
-		
 		<div id="builderWFSTree" class="builderWFSTree">
 			<ul id="buiTree" class="ztree myztree"></ul>
 			<link rel="stylesheet" type="text/css" href="lib/zTree/zTreeStyle.css" />
@@ -325,6 +292,9 @@
 				<div id="bar_v" class="lineChart"></div>
 			</div>
 		</div>
+		<script src="js/jquery.mCustomScrollbar.concat.min.js"></script>
+		<script src="js/custom.js"></script>
+
 		<script type="text/javascript" src="http://echarts.baidu.com/gallery/vendors/echarts/echarts.min.js"></script>
 		<script type="text/javascript" src="http://echarts.baidu.com/gallery/vendors/echarts-gl/echarts-gl.min.js"></script>
 		<script type="text/javascript" src="http://echarts.baidu.com/gallery/vendors/echarts-stat/ecStat.min.js"></script>
@@ -342,7 +312,6 @@
 	<script src="js/data_wms.js"></script>
 	<script src="js/data_3Dtile.js"></script>
 	<script src="js/data_op.js"></script>
-
 
 <!-- 	<script src="js/plan.js"></script> -->
 </body>
