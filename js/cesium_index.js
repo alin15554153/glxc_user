@@ -49,8 +49,8 @@ $(".cesium-viewer-timelineContainer").hide();
 CesiumIndex.viewer.scene.globe.depthTestAgainstTerrain = false;
 
 CesiumIndex.cec =  new Cesium.CompositeEntityCollection();
-CesiumIndex.entity_billboards = new Cesium.EntityCollection(CesiumIndex.cec);
-CesiumIndex.addLabel = function(path,x,y,z){
+CesiumIndex.entity_billboards_3dtile = new Cesium.EntityCollection(CesiumIndex.cec);
+CesiumIndex.addLabel = function(entity_billboards,path,x,y,z){
 		var en = CesiumIndex.viewer.entities.add({
 		position : Cesium.Cartesian3.fromDegrees(x, y,z),
 		billboard : {
@@ -63,28 +63,29 @@ CesiumIndex.addLabel = function(path,x,y,z){
             height : 12 // default: undefined
 		}
 	})
-	CesiumIndex.entity_billboards.add(en)
+	entity_billboards.add(en)
 }
 CesiumIndex.addLabels = function(){
-	CesiumIndex.addLabel('img/Label/01_zt.png',119.4981610,32.3914035,39);
-	CesiumIndex.addLabel('img/Label/02_jd.png' ,119.4992328 ,32.3922905 ,72);
-	CesiumIndex.addLabel('img/Label/03_yk.png' ,119.5002153 ,32.3922585 ,38);
-	CesiumIndex.addLabel('img/Label/03.png'    ,119.5000959 ,32.3912112 ,36);
-	CesiumIndex.addLabel('img/Label/04_df.png' ,119.5015910 ,32.3911621 ,36);
-	CesiumIndex.addLabel('img/Label/05_hf.png' ,119.5007898 ,32.3917247 ,22);
-	CesiumIndex.addLabel('img/Label/06_sh.png' ,119.4992868 ,32.3903867 ,36);
-	CesiumIndex.addLabel('img/Label/07_zh.png' ,119.5001304 ,32.3904353 ,35);
-	CesiumIndex.addLabel('img/Label/08.png'    ,119.5015710 ,32.3918366 ,36);
-	CesiumIndex.addLabel('img/Label/12.png' ,119.4983252 ,32.3904518 ,36);
-	CesiumIndex.addLabel('img/Label/15.png' ,119.4990971 ,32.3915790 ,35);
-	CesiumIndex.addLabel('img/Label/16.png' ,119.4992704 ,32.3911398 ,34);
+	CesiumIndex.addLabel(CesiumIndex.entity_billboards_3dtile,'img/Label/01_zt.png',119.4981610,32.3914035,39);
+	CesiumIndex.addLabel(CesiumIndex.entity_billboards_3dtile,'img/Label/02_jd.png' ,119.4992328 ,32.3922905 ,72);
+	CesiumIndex.addLabel(CesiumIndex.entity_billboards_3dtile,'img/Label/03_yk.png' ,119.5002153 ,32.3922585 ,38);
+	CesiumIndex.addLabel(CesiumIndex.entity_billboards_3dtile,'img/Label/03.png'    ,119.5000959 ,32.3912112 ,36);
+	CesiumIndex.addLabel(CesiumIndex.entity_billboards_3dtile,'img/Label/04_df.png' ,119.5015910 ,32.3911621 ,36);
+	CesiumIndex.addLabel(CesiumIndex.entity_billboards_3dtile,'img/Label/05_hf.png' ,119.5007898 ,32.3917247 ,22);
+	CesiumIndex.addLabel(CesiumIndex.entity_billboards_3dtile,'img/Label/06_sh.png' ,119.4992868 ,32.3903867 ,36);
+	CesiumIndex.addLabel(CesiumIndex.entity_billboards_3dtile,'img/Label/07_zh.png' ,119.5001304 ,32.3904353 ,35);
+	CesiumIndex.addLabel(CesiumIndex.entity_billboards_3dtile,'img/Label/08.png'    ,119.5015710 ,32.3918366 ,36);
+	CesiumIndex.addLabel(CesiumIndex.entity_billboards_3dtile,'img/Label/12.png' ,119.4983252 ,32.3904518 ,36);
+	CesiumIndex.addLabel(CesiumIndex.entity_billboards_3dtile,'img/Label/15.png' ,119.4990971 ,32.3915790 ,35);
+	CesiumIndex.addLabel(CesiumIndex.entity_billboards_3dtile,'img/Label/16.png' ,119.4992704 ,32.3911398 ,34);
 }
 
-CesiumIndex.removeLabels = function(){
-	for(var i = 0; i <CesiumIndex.entity_billboards._entities._array.length; i++){
-		CesiumIndex.viewer.entities.remove(CesiumIndex.entity_billboards._entities._array[i]);
+CesiumIndex.removeLabels = function(labels){
+	for(var i = 0; i <labels._entities._array.length; i++){
+		CesiumIndex.viewer.entities.remove(labels._entities._array[i]);
 	}
 }
+
 
 //恢复到全图
 CesiumIndex.wholeView = function(x,y,z){

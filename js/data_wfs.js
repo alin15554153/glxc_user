@@ -2,7 +2,7 @@ var Wfs = {
 	url_Build_Wfs:'http://localhost:8081/geoserver/lgl/ows?service=WFS&version=1.0.0&request=GetFeature&typeName=lgl%3Aglxc_builder_84&outputFormat=application%2Fjson',
 	url_Block_Wfs: 'http://localhost:8081/geoserver/lgl/ows?service=WFS&version=1.0.0&request=GetFeature&typeName=lgl%3Aglxc_block_84&outputFormat=application%2Fjson',
 	//url_Cad_Wfs :'http://localhost:8081/geoserver/lgl/ows?service=WFS&version=1.0.0&request=GetFeature&typeName=lgl%3Aglxc_cad_84&outputFormat=application%2Fjson',
-	url_Cad_Wfs :'http://localhost:8081/geoserver/lgl/ows?service=WFS&version=1.0.0&request=GetFeature&typeName=lgl%3Aglxc_cad_84_2&outputFormat=application%2Fjson',
+	url_Cad_Wfs :'http://localhost:8081/geoserver/lgl/ows?service=WFS&version=1.0.0&request=GetFeature&typeName=lgl%3Aglxc_cad_84&outputFormat=application%2Fjson',
 	dataSource_Wfc_Build:null,
 	dataSource_Wfc_Block:null,
 	entities_Block:[],
@@ -247,9 +247,13 @@ Wfs.showBlock =function (){
 			var promise = Cesium.GeoJsonDataSource.load(data);
 			promise.then(
 				function(dataSource) {
+
+
+
 					Wfs.dataSource_Wfc_Block = dataSource;
 					CesiumIndex.viewer.dataSources.add(dataSource);
 					var entities = dataSource.entities.values;
+					entities_Block = dataSource.entities.values;
 					for (var i = 0; i < entities.length; i++) {
 						var entity = entities[i];
 						
@@ -267,73 +271,10 @@ Wfs.showBlock =function (){
 							m.supporting = entity._properties._Supporting._value;
 							data_wfs_block.push(m);
 						}
-
-						//entity.polyline=null;
-						switch(entity._properties._Color._value)
-						{
-						case 131:
-						entity.polygon.material = new Cesium.Color.fromBytes(128,255,252,255)
-						break;
-						case 80:
-						entity.polygon.material = new Cesium.Color.fromBytes(57,255,0,255)
-						break;
-						case 104:
-						entity.polygon.material = new Cesium.Color.fromBytes(2,129,27,255)
-						break;
-						case 50://R2
-						entity.polygon.material = new Cesium.Color.fromBytes(255,255,124,255)
-						break;
-						case 11:
-						entity.polygon.material = new Cesium.Color.fromBytes(255,130,122,255)
-						break;
-						case 31:
-						entity.polygon.material =  new Cesium.Color.fromBytes(255,191,124,255)
-						break;
-						case 10:
-						entity.polygon.material = new Cesium.Color.fromBytes(255,0,0,255)
-						break;
-						case 200:
-						entity.polygon.material = new Cesium.Color.fromBytes(122,2,0,255)
-						break;
-						case 231:
-						entity.polygon.material = new Cesium.Color.fromBytes(254,130,188,255)
-						break;
-						case 55:
-						entity.polygon.material = new Cesium.Color.fromBytes(128,128,62,255)
-						break;
-						case 32:
-						entity.polygon.material = new Cesium.Color.fromBytes(165,82,0,255)
-						break;
-						case 33:
-						entity.polygon.material = new Cesium.Color.fromBytes(150,150,150,255)
-						break;
-						case 221:
-						entity.polygon.material = new Cesium.Color.fromBytes(254,129,221,255)
-						break;
-						case 8:
-						entity.polygon.material =  new Cesium.Color.fromBytes(128,128,128,255)
-						break;
-						case 21:
-						entity.polygon.material = new Cesium.Color.fromBytes(254,163,122,255)
-						break;
-						case 30:
-						entity.polygon.material = new Cesium.Color.fromBytes(254,130,188,255)
-						break;
-						case 151:
-						entity.polygon.material = new Cesium.Color.fromBytes(192,192,192,255)
-						break;
-						case 81:
-						entity.polygon.material = new Cesium.Color.fromBytes(159,255,126,255)
-						break;
-						case 7:
-						entity.polygon.material = new Cesium.Color.fromBytes(57,255,0,255)
-						break;
-						default:
-								entity.polygon.material = new Cesium.Color.fromBytes(110,110,110,255)
-						}
-						
 					}
-					//Wfs.showTable_Block(data_wfs_block)	;
+					Wfs.showBlockByColor();
+					Wfs.showText_Block();
+					Wfs.addLibel();
 				}
 			)
 		},
@@ -343,10 +284,252 @@ Wfs.showBlock =function (){
 	});
 }
 
+
+Wfs.showBlockByColor = function(){
+	for (var i = 0; i < entities_Block.length; i++) {
+		var entity = entities_Block[i];
+		switch(entity._properties._Color._value){
+			case 131:
+			entity.polygon.material = new Cesium.Color.fromBytes(128,255,252,255)
+			break;
+			case 80:
+			entity.polygon.material = new Cesium.Color.fromBytes(57,255,0,255)
+			break;
+			case 104:
+			entity.polygon.material = new Cesium.Color.fromBytes(2,129,27,255)
+			break;
+			case 50://R2
+			entity.polygon.material = new Cesium.Color.fromBytes(255,255,124,255)
+			break;
+			case 11:
+			entity.polygon.material = new Cesium.Color.fromBytes(255,130,122,255)
+			break;
+			case 31:
+			entity.polygon.material =  new Cesium.Color.fromBytes(255,191,124,255)
+			break;
+			case 10:
+			entity.polygon.material = new Cesium.Color.fromBytes(255,0,0,255)
+			break;
+			case 200:
+			entity.polygon.material = new Cesium.Color.fromBytes(122,2,0,255)
+			break;
+			case 231:
+			entity.polygon.material = new Cesium.Color.fromBytes(254,130,188,255)
+			break;
+			case 55:
+			entity.polygon.material = new Cesium.Color.fromBytes(128,128,62,255)
+			break;
+			case 32:
+			entity.polygon.material = new Cesium.Color.fromBytes(165,82,0,255)
+			break;
+			case 33:
+			entity.polygon.material = new Cesium.Color.fromBytes(150,150,150,255)
+			break;
+			case 221:
+			entity.polygon.material = new Cesium.Color.fromBytes(254,129,221,255)
+			break;
+			case 8:
+			entity.polygon.material =  new Cesium.Color.fromBytes(128,128,128,255)
+			break;
+			case 21:
+			entity.polygon.material = new Cesium.Color.fromBytes(254,163,122,255)
+			break;
+			case 30:
+			entity.polygon.material = new Cesium.Color.fromBytes(254,130,188,255)
+			break;
+			case 151:
+			entity.polygon.material = new Cesium.Color.fromBytes(192,192,192,255)
+			break;
+			case 81:
+			entity.polygon.material = new Cesium.Color.fromBytes(159,255,126,255)
+			break;
+			case 7:
+			entity.polygon.material = new Cesium.Color.fromBytes(57,255,0,255)
+			break;
+			default:
+			entity.polygon.material = new Cesium.Color.fromBytes(110,110,110,255)
+		}
+	}
+}
+Wfs.showBlockByBuild = function(){
+	for (var i = 0; i < entities_Block.length; i++) {
+		var entity = entities_Block[i];
+		switch(entity._properties._BuildState._value){
+			case '待建':
+				entity.polygon.material = new Cesium.Color.fromBytes(255,0,0,255)
+			break;
+			case '在建':
+				entity.polygon.material = new Cesium.Color.fromBytes(255,255,0,255)
+				break;
+			case '建成':
+				entity.polygon.material = new Cesium.Color.fromBytes(0, 150, 50,255)
+				break;
+			default:
+				entity.polygon.material = new Cesium.Color.fromBytes(110,110,110,255)
+		}
+	}
+}
+Wfs.showBlockBySale = function(){
+	for (var i = 0; i < entities_Block.length; i++) {
+		var entity = entities_Block[i];
+		switch(entity._properties._SaleState._value){
+			case '待售':
+				entity.polygon.material = new Cesium.Color.fromBytes(255,0,0,255)
+			break;
+			case '在售':
+				entity.polygon.material = new Cesium.Color.fromBytes(255,255,0,255)
+				break;
+			case '售完':
+				entity.polygon.material = new Cesium.Color.fromBytes(0, 150, 50,255)
+				break;
+			default:
+				entity.polygon.material = new Cesium.Color.fromBytes(110,110,110,255)
+		}
+	}
+}
+
+Wfs.showBlockByGrey = function(){
+	for (var i = 0; i < entities_Block.length; i++) {
+		var entity = entities_Block[i];
+
+		entity.polygon.material = new Cesium.Color.fromBytes(110,110,110,255)
+	}
+}
+
+Wfs.drawCanvas = function (img,text,fontsize){
+    var canvas = document.createElement('canvas');      //创建canvas标签
+    var ctx = canvas.getContext('2d');
+ 
+    ctx.fillStyle = '#99f';
+    ctx.font = fontsize + "px Arial";
+ 
+    canvas.width = ctx.measureText(text).width + fontsize * 2;      //根据文字内容获取宽度
+	canvas.height = fontsize * 2; // fontsize * 1.5
+	
+	if(img!=''){
+
+		var bgImg = new Image();
+		bgImg.src = img;
+		bgImg.onload = function(){
+			ctx.drawImage(bgImg,0,0,64,64);
+		}
+		// setTimeout(function(){
+		// 	ctx.drawImage(bgImg,0,0,64,64);
+		// },10)
+	}
+
+    ctx.fillStyle = '#000';
+    ctx.font = fontsize + "px Calibri,sans-serif";
+    ctx.shadowOffsetX = 1;    //阴影往左边偏，横向位移量
+    ctx.shadowOffsetY = 0;   //阴影往左边偏，纵向位移量
+    ctx.shadowColor = "#fff"; //阴影颜色
+    ctx.shadowBlur = 1; //阴影的模糊范围
+    ctx.fillText(text, fontsize, fontsize);
+    return canvas;
+}
+
+Wfs.addText = function(entity_texts,path,x,y){
+	var en = CesiumIndex.viewer.entities.add({
+		position : Cesium.Cartesian3.fromDegrees(x, y,25),
+		billboard : {
+			image : path,
+			sizeInMeters : true,
+			horizontalOrigin : Cesium.HorizontalOrigin.CENTER, // default
+			verticalOrigin : Cesium.VerticalOrigin.CENTER, // default: CENTER
+			scale : 1,
+			// width : path.width , // default: undefined
+			// height : canvas.height // default: undefined
+		}
+	})
+	entity_texts.add(en)
+}
+
+
+Wfs.removeText = function(texts){
+	if(texts!=null){
+		for(var i = 0; i <texts._entities._array.length; i++){
+			CesiumIndex.viewer.entities.remove(texts._entities._array[i]);
+		}
+	}
+
+}
+
+
+Wfs.entity_libel = new Cesium.EntityCollection();
+Wfs.isShowLibel = 0
+Wfs.showLibel= function(){
+	if(Wfs.isShowLibel == 0){
+		// Wfs.showBlockByGrey();
+		Wfs.removeText(Wfs.entity_libel)
+		// Wfs.removeText(Wfs.entity_texts_blockname)
+	
+		Wfs.addText(Wfs.entity_libel,'img/Legend/农贸.png',119.4855,32.4174);
+		Wfs.addText(Wfs.entity_libel,Wfs.drawCanvas('','华星农贸市场',36),119.4855,32.4179);
+	
+		Wfs.addText(Wfs.entity_libel,'img/Legend/小学.png',119.4841,32.3995);
+		Wfs.addText(Wfs.entity_libel,'img/Legend/初中.png',119.4859,32.3995);
+		Wfs.addText(Wfs.entity_libel,Wfs.drawCanvas('','新东方学校',36),119.485,32.3999);
+	
+		Wfs.addText(Wfs.entity_libel,'img/Legend/幼儿园.png',119.484,32.398);
+		Wfs.addText(Wfs.entity_libel,Wfs.drawCanvas('','满天星幼儿园',36),119.484,32.3985);
+	
+		Wfs.addText(Wfs.entity_libel,'img/Legend/医院.png',119.481,32.41);
+		Wfs.addText(Wfs.entity_libel,Wfs.drawCanvas('','妇幼保健院(在建)',36),119.481,32.4105);
+	
+		Wfs.addText(Wfs.entity_libel,'img/Legend/商办.png',119.481,32.398);
+		Wfs.addText(Wfs.entity_libel,Wfs.drawCanvas('','环球金融城',36),119.481,32.3985);
+	
+		Wfs.addText(Wfs.entity_libel,'img/Legend/商办.png',119.4863,32.398);
+		Wfs.addText(Wfs.entity_libel,Wfs.drawCanvas('','交通银行',36),119.4863,32.3985);
+	
+		Wfs.addText(Wfs.entity_libel,'img/Legend/政务中心.png',119.49,32.396);
+		Wfs.addText(Wfs.entity_libel,Wfs.drawCanvas('','市民广场',36),119.49,32.3965);
+	
+		Wfs.addText(Wfs.entity_libel,'img/Legend/商办.png',119.499,32.399);
+		Wfs.addText(Wfs.entity_libel,Wfs.drawCanvas('','泰达Y_MSD',36),119.499,32.3995);
+	
+		Wfs.addText(Wfs.entity_libel,'img/Legend/工业园.png',119.5,32.3901);
+		Wfs.addText(Wfs.entity_libel,Wfs.drawCanvas('','信息产业基地',36),119.5,32.3907);
+	
+		Wfs.addText(Wfs.entity_libel,'img/Legend/公园.png',119.505,32.395);
+		Wfs.addText(Wfs.entity_libel,Wfs.drawCanvas('','李宁体育公园',36),119.505,32.3955);
+	
+		Wfs.addText(Wfs.entity_libel,'img/Legend/小学.png',119.501,32.409);
+		Wfs.addText(Wfs.entity_libel,Wfs.drawCanvas('','育才小学东校区',36),119.501,32.4095);
+	
+		Wfs.addText(Wfs.entity_libel,'img/Legend/小学.png',119.4975,32.4135);
+		Wfs.addText(Wfs.entity_libel,'img/Legend/初中.png',119.4985,32.4135);
+		Wfs.addText(Wfs.entity_libel,Wfs.drawCanvas('','华师大附中',36),119.498,32.4141);
+	
+		Wfs.addText(Wfs.entity_libel,'img/Legend/医院.png',119.488,32.414);
+		Wfs.addText(Wfs.entity_libel,Wfs.drawCanvas('','天顺花园社区卫生服务站',36),119.488,32.4145);
+		Wfs.isShowLibel = 1;
+	}else{
+		Wfs.isShowLibel = 0;
+		Wfs.removeText(Wfs.entity_libel);
+		// Wfs.showBlockByColor();
+	}
+}
+Wfs.entity_texts_blockname = new Cesium.EntityCollection();
+Wfs.showText_Block= function(){
+	Wfs.addText(Wfs.entity_texts_blockname,Wfs.drawCanvas('','867地块',36),119.483,32.414);
+	Wfs.addText(Wfs.entity_texts_blockname,Wfs.drawCanvas('','中央学府',36),119.485,32.411);
+	Wfs.addText(Wfs.entity_texts_blockname,Wfs.drawCanvas('','翡翠公园',36),119.493,32.406);
+	Wfs.addText(Wfs.entity_texts_blockname,Wfs.drawCanvas('','广陵铭著',36),119.494,32.404);
+	Wfs.addText(Wfs.entity_texts_blockname,Wfs.drawCanvas('','运河尚郡',36),119.485,32.3934);
+	Wfs.addText(Wfs.entity_texts_blockname,Wfs.drawCanvas('','运河东郡',36),119.485,32.391);
+	Wfs.addText(Wfs.entity_texts_blockname,Wfs.drawCanvas('','运和蓝湾',36),119.49,32.392);
+	Wfs.addText(Wfs.entity_texts_blockname,Wfs.drawCanvas('','京杭融园',36),119.493,32.391);
+	Wfs.addText(Wfs.entity_texts_blockname,Wfs.drawCanvas('','佳源华府',36),119.496,32.391);
+	Wfs.addText(Wfs.entity_texts_blockname,Wfs.drawCanvas('','877地块',36),119.503,32.401);
+	Wfs.addText(Wfs.entity_texts_blockname,Wfs.drawCanvas('','朗润园',36),119.498,32.409);
+}
+
+
+
 //显示block的表格
 Wfs.showTable_Block = function(data){
 	$('#blockWFSTabledivid').show();
-	
 	$('#blockWFSIdTable').bootstrapTable({
 		//url: '/Interface/GetData',         //请求后台的URL（*）
 		showHeader: true,
@@ -460,48 +643,92 @@ Wfs.showInfo_Block = function(entity){
 		data.supporting = entity._properties._Supporting._value;
 		data.name_all = entity._properties.Name_all._value;
 		//data_wfs_block.push(data);
+		data.buildstate = entity._properties.BuildState._value;
+		data.salestate = entity._properties.SaleState._value;
+		data.blockname = entity._properties.BlockName._value;
+		data.selltime = entity._properties.SellTime._value;
+		data.sellprice = entity._properties.SellPrice._value;
+		data.arearatio = entity._properties.AreaRatio._value;
+		data.dev = entity._properties.Dev._value;
+		data.comtime = entity._properties.ComTime._value;
+		data.saleprice = entity._properties.SalePrice._value;
+		data.floorprice = entity._properties.FloorPrice._value;
 	}
 
 	var content='<table class="cesium-infoBox-defaultTable"><tbody>'
-		+ '<tr><th>用地编号</th><td>'
-    	+ data.refname2
-    	+ '</td></tr>'
-    	+ '<tr><th>面积</th><td >'
-		+ data.landarea
-		+ '</td></tr>'
 		+ '<tr><th>用地性质</th><td >'
 		+ data.landnature
 		+ '</td></tr>'
+
+		+ '<tr><th>出让时间</th><td >'
+		+ (data.selltime!=null ? data.selltime : '-')
+		+ '</td></tr>'
+
+		+ '<tr><th>出让价格</th><td >'
+		+ (data.sellprice!=null ? data.sellprice : '-')
+		+ '</td></tr>'
+
+		+ '<tr><th>容积率</th><td >'
+		+ (data.arearatio!=undefined ? data.arearatio : data.plotratio)
+		+ '</td></tr>'
+
+		+ '<tr><th>楼面价</th><td >'
+		+ (data.floorprice!=null ? data.floorprice : '-')
+		+ '</td></tr>'
+
+		+ '<tr><th>开发商</th><td >'
+		+ (data.dev!=null ? data.dev : '-')
+		+ '</td></tr>'
+
+		+ '<tr><th>建成时间</th><td >'
+		+ (data.comtime!=null ? data.comtime : '-')
+		+ '</td></tr>'
+
+		+ '<tr><th>销售价格</th><td >'
+		+ (data.saleprice!=null ? data.saleprice : '-')
+		+ '</td></tr>'
+
+
+		+ '<tr><th>用地编号</th><td>'
+    	+ data.refname2
+		+ '</td></tr>'
+		
+    	+ '<tr><th>面积</th><td >'
+		+ data.landarea
+		+ '</td></tr>'
+
 		+ '<tr><th>用地编号</th><td >'
 		+ data.naturecode
 		+ '</td></tr>'
+
 		+ '<tr><th>建筑密度</th><td >'
 		+ data.buildingde
 		+ '</td></tr>'
-		+ '<tr><th>容积率</th><td >'
-		+ data.plotratio
-		+ '</td></tr>'
+
+
 		+ '<tr><th>绿地率</th><td >'
 		+ data.greenspace
 		+ '</td></tr>'
-		+ '<tr><th>建筑限高</th><td >'
-		+ data.buildinghe
-		+ '</td></tr>'
-		+ '<tr><th>配套设施</th><td >'
-		+ data.supporting
-		+ '</td></tr>'
-		+ '<tr><th>备注</th><td >'
-		+ data.remarks
-		+ '</td></tr>'
+
 		+ '<tr><th>显示建筑</th><td >'
 		+ '<a href="javascript:void(0);" id="'+data.name_all+'" name="' 
 		+ data.name_all
 		+ '" onclick="parent.Wfs.showBuildByBlockName(name)">加载建筑WFS</a>'
 		+ '</td></tr>'
 		+ '</tbody></table>';
-	var selectedEntity = new Cesium.Entity();
-	selectedEntity.name = data.carLicense;
+
+		var selectedEntity
+		if(data.blockname!=null){
+			selectedEntity = new Cesium.Entity({
+				id:data.dev+ '-'+data.blockname+'('+ data.buildstate +data.salestate + ')'
+			})
+		}
+		if(data.blockname==null){
+			selectedEntity = new Cesium.Entity()
+		}
+
 	selectedEntity.description = content;
+	// CesiumIndex.viewer.infoBox.viewModel.titleText = data.dev;
 	CesiumIndex.viewer.selectedEntity = selectedEntity;
 }
 
@@ -524,6 +751,7 @@ Wfs.hideBlockByDS = function(){
 	CesiumIndex.viewer.dataSources.remove(Wfs.dataSource_Wfc_Block);
 	$('#blockWFSTabledivid').hide();;//隐藏	
 	$('#blockcolor_di').hide();
+	Wfs.removeText(Wfs.entity_texts_blockname);
 }
 //定位wfs
 Wfs.findById = function (id){

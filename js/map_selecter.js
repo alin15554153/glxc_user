@@ -14,10 +14,7 @@ var arg = argsIndex[1];
     }
     
     $(function () {
-        
         init();
-        
-
         if(arg == 5){
             Wfs.showBlock();
             CesiumIndex.wholeView(119.499698, 32.366185,3600);
@@ -69,7 +66,7 @@ var arg = argsIndex[1];
                 $("#id-map-3D-chechbox").prop("checked", false);
                 Tile_3D.hideTile3D_Build();
                 Tile_3D.hideTile3D_Block();
-                CesiumIndex.removeLabels();
+                CesiumIndex.removeLabels(CesiumIndex.entity_billboards_3dtile);
                 $('#lease_Tabledivid').hide();
             }else{
 
@@ -85,7 +82,7 @@ var arg = argsIndex[1];
 
                 $("#id-map-OP-chechbox").prop("checked", false);
                 Tile_OP.hideMap_OP();
-                CesiumIndex.removeLabels();
+                CesiumIndex.removeLabels(CesiumIndex.entity_billboards_3dtile);
             }else{
 
                 $("#id-map-OP-chechbox").prop("checked", true);  
